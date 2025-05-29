@@ -143,3 +143,21 @@ li {
     flex-basis: auto; /* Reset flex-basis for stacked layout */
   }
 }
+
+/* Styles for ability links */
+.ability-link {
+  color: #0056b3; /* Example link color */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.ability-link:hover {
+  text-decoration: underline;
+  color: #003d80; /* Darker on hover */
+}
+
+.hidden-ability-indicator {
+  font-style: italic;
+  color: #555;
+  font-size: 0.9em;
+}

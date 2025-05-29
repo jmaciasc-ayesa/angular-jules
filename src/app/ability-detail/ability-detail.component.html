@@ -1,0 +1,40 @@
+<div class="ability-detail-container">
+  <a routerLink="/" class="back-link">&laquo; Back to Pokedex</a>
+
+  @if (ability$ | async; as ability) {
+    <div>
+      <h2 class="ability-name">{{ ability.name | titlecase }}</h2>
+
+      @if (ability.shortEffect) {
+        <section class="ability-section">
+          <h3>Summary</h3>
+          <p>{{ ability.shortEffect }}</p>
+        </section>
+      }
+
+      @if (ability.effect) {
+        <section class="ability-section">
+          <h3>Full Effect</h3>
+          <p class="effect-text">{{ ability.effect }}</p> <!-- Simplified as per self-correction -->
+        </section>
+      }
+      
+      @if (ability.flavorText) {
+        <section class="ability-section">
+          <h3>Game Description</h3>
+          <p>{{ ability.flavorText }}</p>
+        </section>
+      }
+      
+      @if (!ability.shortEffect && !ability.effect && !ability.flavorText) {
+        <p>No detailed information available for this ability.</p>
+      }
+    </div>
+  } @else {
+    @if (error) {
+      <div class="error-message">{{ error }}</div>
+    } @else {
+      <div class="loading-message">Loading ability details...</div>
+    }
+  }
+</div>

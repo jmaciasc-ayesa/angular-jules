@@ -32,9 +32,11 @@
           <ul>
             @for (abilityInfo of pokemon.abilities; track abilityInfo.ability.name) {
               <li>
-                {{ abilityInfo.ability.name | titlecase }}
+                <a [routerLink]="['/ability', abilityInfo.ability.name.toLowerCase()]" class="ability-link">
+                  {{ abilityInfo.ability.name | titlecase }}
+                </a>
                 @if (abilityInfo.is_hidden) {
-                  <span>(Hidden)</span>
+                  <span class="hidden-ability-indicator"> (Hidden)</span>
                 }
               </li>
             }

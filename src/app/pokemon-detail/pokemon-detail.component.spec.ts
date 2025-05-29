@@ -18,11 +18,14 @@ describe('PokemonDetailComponent', () => {
     height: 4,
     weight: 60,
     sprites: {
-      front_default: 'pikachu.png', // This will be overridden by official_artwork in the component logic
+      front_default: 'pikachu.png',
       other: { official_artwork: { front_default: 'official-pikachu.png' } }
     },
     types: [{ slot: 1, type: { name: 'electric', url: '' } }],
-    abilities: [{ ability: { name: 'static', url: '' }, is_hidden: false, slot: 1 }],
+    abilities: [ // Updated abilities for better testing
+      { ability: { name: 'static', url: 'url/to/static' }, is_hidden: false, slot: 1 },
+      { ability: { name: 'lightning-rod', url: 'url/to/lr' }, is_hidden: true, slot: 3 }
+    ],
     stats: [{ base_stat: 35, effort: 0, stat: { name: 'hp', url: '' } }]
   };
 
@@ -84,6 +87,25 @@ describe('PokemonDetailComponent', () => {
     expect(compiled.querySelector('h2')?.textContent).toContain(mockPokemonName); // Name is titlecased
     expect(compiled.querySelector('.pokemon-image')?.getAttribute('src')).toBe(mockPokemonDetail.sprites.other?.official_artwork?.front_default);
     expect(compiled.querySelector('.type-electric')?.textContent).toContain('Electric'); // Type is titlecased
+
+    // Check for ability links
+    // The selector needs to be specific to where abilities are rendered.
+    // Based on pokemon-detail.component.html, abilities are in a list within .pokemon-info-section.
+    // The structure is ul -> li -> a.
+    const abilityElements = compiled.querySelectorAll('.pokemon-info-section ul:nth-of-type(2) li a.ability-link');
+    expect(abilityElements.length).toBe(2);
+    
+    const staticLink = abilityElements[0] as HTMLAnchorElement;
+    expect(staticLink.textContent).toContain('Static'); // titlecase pipe from Angular CommonModule
+    expect(staticLink.getAttribute('href')).toBe('/ability/static');
+
+    const lightningRodLink = abilityElements[1] as HTMLAnchorElement;
+    expect(lightningRodLink.textContent).toContain('Lightning-Rod'); // titlecase pipe
+    expect(lightningRodLink.getAttribute('href')).toBe('/ability/lightning-rod');
+    
+    const hiddenIndicator = compiled.querySelector('.pokemon-info-section ul:nth-of-type(2) li:nth-child(2) .hidden-ability-indicator');
+    expect(hiddenIndicator).toBeTruthy();
+    expect(hiddenIndicator?.textContent).toContain('(Hidden)');
   }));
   
   it('should display error message if route parameter :name is missing', fakeAsync(() => {

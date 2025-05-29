@@ -1,0 +1,66 @@
+.ability-detail-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 700px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #007bff;
+  text-decoration: none;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.ability-name {
+  text-transform: capitalize;
+  color: #333;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2em;
+}
+
+.ability-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.ability-section h3 {
+  margin-top: 0;
+  color: #555;
+  font-size: 1.4em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.ability-section p {
+  line-height: 1.6;
+  color: #444;
+  white-space: pre-wrap; /* To respect newlines in the effect text if any */
+}
+
+.error-message, .loading-message {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.1em;
+}
+.error-message {
+  color: red;
+  background-color: #ffebeb;
+  border: 1px solid red;
+  border-radius: 4px;
+}
+.loading-message {
+  color: #777;
+}
