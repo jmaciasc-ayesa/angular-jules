@@ -63,7 +63,7 @@ export class PokemonDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
 
-  pokemonDetail$: Observable<PokemonDetailApiResponse | null | undefined>; // Observable to hold Pokemon details or null/undefined for loading/error
+  pokemonDetail$: Observable<PokemonDetailApiResponse | null | undefined> = of(null); // Initialize with of(null)
   error: string | null = null;
 
   ngOnInit(): void {
