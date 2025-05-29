@@ -1,0 +1,53 @@
+<div class="pokemon-detail-container">
+  <a routerLink="/" class="back-link">&laquo; Back to Pokedex</a>
+
+  <div *ngIf="pokemonDetail$ | async as pokemon; else loadingOrError">
+    <h2>{{ pokemon.name | titlecase }} (#{{ pokemon.id }})</h2>
+    
+    <div class="pokemon-layout">
+      <div class="pokemon-image-section">
+        <img *ngIf="pokemon.sprites?.front_default" [src]="pokemon.sprites.front_default" [alt]="pokemon.name" class="pokemon-image">
+        <p *ngIf="!pokemon.sprites?.front_default" class="no-image-available">Image not available</p>
+      </div>
+
+      <div class="pokemon-info-section">
+        <h3>Details</h3>
+        <p><strong>Height:</strong> {{ pokemon.height ? pokemon.height / 10 : 'N/A' }} m</p>
+        <p><strong>Weight:</strong> {{ pokemon.weight ? pokemon.weight / 10 : 'N/A' }} kg</p>
+
+        <h3>Types</h3>
+        <ul>
+          <li *ngFor="let typeInfo of pokemon.types" [class]="'type-' + typeInfo.type.name">
+            {{ typeInfo.type.name | titlecase }}
+          </li>
+        </ul>
+
+        <h3>Abilities</h3>
+        <ul>
+          <li *ngFor="let abilityInfo of pokemon.abilities">
+            {{ abilityInfo.ability.name | titlecase }}
+            <span *ngIf="abilityInfo.is_hidden">(Hidden)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Base Stats</h3>
+    <ul class="pokemon-stats">
+      <li *ngFor="let statInfo of pokemon.stats">
+        <span class="stat-name">{{ statInfo.stat.name | titlecase }}:</span>
+        <div class="stat-bar-container">
+          <div class="stat-bar" [style.width.%]="(statInfo.base_stat / 255) * 100"> <!-- Max base stat can be assumed ~255 for styling -->
+            {{ statInfo.base_stat }}
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+  <ng-template #loadingOrError>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+    <div *ngIf="!error" class="loading-message">Loading Pokemon details...</div>
+  </ng-template>
+</div>

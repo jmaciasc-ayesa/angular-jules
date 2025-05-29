@@ -7,20 +7,17 @@ h2 {
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0; /* Added to remove default ul margin */
 }
 
 li {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   margin-top: -1px; /* Prevent double borders */
-  padding: 12px;
-  text-transform: capitalize; /* Capitalize Pokemon names */
-  font-family: Arial, sans-serif;
+  /* padding: 12px; -- Handled by .pokemon-item or .pokemon-link now */
 }
 
-li:hover {
-  background-color: #f1f1f1;
-}
+/* li:hover is now handled by .pokemon-link:hover .pokemon-item */
 
 .error-message {
   color: red;
@@ -31,7 +28,56 @@ li:hover {
 }
 
 /* Styling for loading message */
-p {
+.loading-indicator, .no-pokemon-found { /* Combined as they might share styles */
   font-style: italic;
   color: #777;
+  padding: 10px;
+  text-align: center;
+}
+
+/* New styles for Pokemon items, images, and links */
+.pokemon-item {
+  display: flex;
+  align-items: center;
+  padding: 8px; /* Padding inside the link area */
+  text-decoration: none;
+  color: inherit;
+}
+
+.pokemon-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Make the link fill the li */
+}
+
+.pokemon-link:hover .pokemon-item {
+  background-color: #e9e9e9; /* Slight hover effect on item */
+}
+
+.pokemon-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.no-image-placeholder {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  background-color: #f0f0f0;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  text-align: center;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.pokemon-name {
+  text-transform: capitalize;
+  font-family: Arial, sans-serif; /* Ensure font family is consistent */
 }
