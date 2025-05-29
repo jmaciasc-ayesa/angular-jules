@@ -1,32 +1,34 @@
-@if(isLoading && pokemonList.length === 0){
-    <div class="loading-indicator">
+@if (isLoading && pokemonList.length === 0) {
+  <div class="loading-indicator">
     Loading Pokemon details...
-    </div>
-}
-
-@if(error){
-    <div class="error-message">
-    {{error}}
-    </div>
-}
-
-@if(!isLoading && !error && pokemonList.length === 0){
-    <div class="no-pokemon-found">
+  </div>
+} @else if (error) {
+  <div class="error-message">
+    {{ error }}
+  </div>
+} @else if (!isLoading && !error && pokemonList.length === 0) {
+  <div class="no-pokemon-found">
     No Pokemon found.
-    </div>
-}
-
-@if(!isLoading && pokemonList){
-  <h2>Pokemon List</h2>
-  <ul>
-    <li *ngFor="let pokemon of pokemonList">
-      <a [routerLink]="['/pokemon', pokemon.name.toLowerCase()]" class="pokemon-link">
-        <div class="pokemon-item">
-          <img *ngIf="pokemon.imageUrl" [src]="pokemon.imageUrl" [alt]="pokemon.name" class="pokemon-image">
-          <div *ngIf="!pokemon.imageUrl" class="no-image-placeholder">No Image</div>
-          <span class="pokemon-name">{{ pokemon.name }}</span>
-        </div>
-      </a>
-    </li>
-  </ul>
+  </div>
+} @else if (!isLoading && pokemonList.length > 0) { <!-- This implies pokemonList has items -->
+  <div>
+    <h2>Pokemon List</h2>
+    <ul>
+      @for (pokemon of pokemonList; track pokemon.name) {
+        <li>
+          <a [routerLink]="['/pokemon', pokemon.name.toLowerCase()]" class="pokemon-link">
+            <div class="pokemon-item">
+              @if (pokemon.imageUrl) {
+                <img [src]="pokemon.imageUrl" [alt]="pokemon.name" class="pokemon-image">
+              } @else {
+                <div class="no-image-placeholder">No Image</div>
+              }
+              <span class="pokemon-name">{{ pokemon.name }}</span>
+            </div>
+          </a>
+        </li>
+      }
+      <!-- No @empty block needed here because the outer @if condition already ensures pokemonList is not empty -->
+    </ul>
+  </div>
 }
