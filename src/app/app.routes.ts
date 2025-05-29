@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
-import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component'; // Import the new component
+import { PokemonListComponent } from './pokemon-list/pokemon-list.component'; // Import PokemonListComponent
+import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 
 export const routes: Routes = [
-  { path: 'pokemon/:name', component: PokemonDetailComponent }
-  // Assuming AppComponent handles the root path and displays PokemonListComponent directly.
-  // If PokemonListComponent were to be routed, a route like { path: '', component: PokemonListComponent } would be added.
+  { path: '', component: PokemonListComponent, pathMatch: 'full' }, // Default route to PokemonListComponent
+  { path: 'pokemon/:name', component: PokemonDetailComponent },
+  { path: '**', redirectTo: '' } // Redirect unknown paths to the default
 ];

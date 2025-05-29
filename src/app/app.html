@@ -1,10 +1,8 @@
 <!-- src/app/app.html -->
 <header>
-  <h1>{{ title }}</h1>
+  <h1>{{ title }}</h1> <!-- Assuming 'title' is a property in app.ts -->
 </header>
 
 <main>
-  <app-pokemon-list></app-pokemon-list>
+  <router-outlet></router-outlet> <!-- RouterOutlet handles display -->
 </main>
-
-<router-outlet />
