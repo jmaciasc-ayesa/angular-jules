@@ -1,0 +1,37 @@
+/* Basic styling for the Pokemon list */
+h2 {
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  padding: 12px;
+  text-transform: capitalize; /* Capitalize Pokemon names */
+  font-family: Arial, sans-serif;
+}
+
+li:hover {
+  background-color: #f1f1f1;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  padding: 10px;
+  border: 1px solid red;
+  background-color: #ffebeb;
+}
+
+/* Styling for loading message */
+p {
+  font-style: italic;
+  color: #777;
+}
